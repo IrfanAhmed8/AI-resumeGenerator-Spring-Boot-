@@ -8,6 +8,6 @@ public class AiResumeBackendApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AiResumeBackendApplication.class, args);
-	}
 
+	}
 }
