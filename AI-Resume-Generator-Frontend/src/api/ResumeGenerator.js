@@ -12,3 +12,4 @@ export const generateResume = async (prompt) => {
   });
   return response.data;
 };
+

@@ -5,17 +5,60 @@ import { ArrowRightCircle } from "lucide-react";
 import heroImg from "../assets/ai_resume_illustration.png"; // make sure this image exists
 import { generateResume } from "../api/ResumeGenerator";
 import toast from "react-hot-toast";
-
+import DynamicForm from "./DynamicForm";
+const initialData = {
+  summary:
+    "I am a Java Developer with expertise in the MERN stack and DSA. I have built microservices using Spring Boot and REST APIs, showcasing my technical skills and experience.",
+  github: "https://github.com/irfan37/",
+  education: [
+    {
+      institution: "XYZ University",
+      year_of_completion: 2024,
+      degree: "B.Tech in Computer Science",
+    },
+  ],
+  projects: [
+    {
+      description: "",
+      project_title: "",
+      technologies_used: ["Spring Boot", "REST APIs"],
+    },
+  ],
+  achievements: [],
+  languages: ["English"],
+  linkedin: "https://www.linkedin.com/in/irfan37/",
+  experience: [
+    {
+      duration: "2 years",
+      role: "Java Developer",
+      responsibilities: ["Built microservices using Spring Boot and REST APIs"],
+      company_name: "",
+    },
+  ],
+  certifications: [],
+  skills: ["Java", "Spring Boot", "REST APIs"],
+  phone: "",
+  portfolio: "",
+  name: "Irfan Ahmed",
+  position: "Java Developer",
+  email: "irfan37@example.com",
+};
 function GenerateResume() {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState(initialData);
+  const [displayFrom,setDisplayFrom]=useState(false);
+
 
   const HandleGenerateResume = async () => {
     console .log("Generating resume with prompt:", prompt);
     try{
       setLoading (true);
       const response = await generateResume(prompt);
+      console.log(response);
+      setFormData(response);
       toast.success("Resume generated successfully!");
+      setDisplayFrom(true);
     }
     catch(error){
       console.error("Error generating resume:", error);
@@ -31,7 +74,9 @@ function GenerateResume() {
     <div className="bg-gradient-to-br from-blue-50 via-white to-blue-100 min-h-screen flex flex-col">
       {/* Navbar */}
       <Navbar />
-
+      
+      {displayFrom &&(<DynamicForm formData={formData} setFormData={setFormData} /> )} 
+     
       {/* Main Content */}
       <div className="flex-grow flex flex-col md:flex-row items-center justify-center gap-10 px-6 py-12 max-w-7xl mx-auto">
         {/* Left Section */}
