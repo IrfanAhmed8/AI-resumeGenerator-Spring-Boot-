@@ -20,7 +20,6 @@ public class PromptService implements promptInterface {
         this.chatClient = builder.build();
     }
 
-    @Override
     public JSONObject generateResumeResponse(String prompt) throws IOException {
 
         String promptDescription = this.loadFile("resume_description.txt");

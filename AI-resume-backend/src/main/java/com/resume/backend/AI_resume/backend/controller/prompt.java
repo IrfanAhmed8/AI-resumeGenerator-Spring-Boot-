@@ -6,20 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/getResponse")
+@CrossOrigin
 public class prompt {
     @Autowired
     PromptService promptService;
 
 
 
-    @GetMapping("/prompt")
-    public String generateResumeResponse(@RequestParam String prompt) throws IOException {
-        JSONObject response = promptService.generateResumeResponse(prompt);
-        return response.toString(4); // pretty print JSON
+    @PostMapping("/prompt")
+    public Map<String, Object> generateResumeResponse(@RequestBody Map<String, String> request) throws IOException {
+        String prompt = request.get("userDescription");
+        return promptService.generateResumeResponse(prompt).toMap();
     }
+
 
 
 
