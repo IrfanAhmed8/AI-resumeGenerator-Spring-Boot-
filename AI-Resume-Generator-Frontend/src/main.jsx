@@ -5,6 +5,7 @@ import './index.css'
 import Home from './pages/home'
 import GenerateResume from './components/GenerateResume'
 import { Toaster } from 'react-hot-toast'
+import Resume from './components/Resume'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/GenerateResume" element={<GenerateResume/>}></Route>
+        <Route path="/Resume" element={<Resume/>}></Route>
       </Routes>
     </BrowserRouter>
   </StrictMode>,

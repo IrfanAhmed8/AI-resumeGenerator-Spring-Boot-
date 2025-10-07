@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 import { motion } from "framer-motion";
 import { ArrowRightCircle } from "lucide-react";
 import heroImg from "../assets/ai_resume_illustration.png"; // make sure this image exists
-import { generateResume } from "../api/ResumeGenerator";
+import { generateFormData} from "../api/ResumeGenerator";
 import toast from "react-hot-toast";
 import DynamicForm from "./DynamicForm";
 const initialData = {
@@ -54,7 +54,7 @@ function GenerateResume() {
     console .log("Generating resume with prompt:", prompt);
     try{
       setLoading (true);
-      const response = await generateResume(prompt);
+      const response = await generateFormData(prompt);
       console.log(response);
       setFormData(response);
       toast.success("Resume generated successfully!");
@@ -107,7 +107,7 @@ function GenerateResume() {
             <button disabled={loading || !prompt.trim()}
               className="btn btn-primary mt-6 w-full rounded-2xl flex items-center justify-center gap-2 text-lg"
               onClick={HandleGenerateResume}
-            >
+            >2
               <ArrowRightCircle size={22} /> View Extracted Details
             </button>
           </div>

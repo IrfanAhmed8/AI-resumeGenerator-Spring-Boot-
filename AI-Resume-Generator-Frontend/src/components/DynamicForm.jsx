@@ -1,18 +1,31 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { generateResume } from "../api/ResumeGenerator";
 
 
 
 function DynamicForm({formData,setFormData}) {
-  
+  const navigate=useNavigate();
 
   const handleChange = (field, value) => {
     setFormData({ ...formData, [field]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form Data Submitted:", formData);
-  };
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  console.log("Form Data Submitted:", formData);
+
+  try {
+    const resumeResponse = await generateResume(formData);
+    toast.success("Resume generated successfully!");
+    navigate("/Resume", { state: { resumeResponse } });
+  } catch (error) {
+    console.error("Error generating resume:", error);
+    toast.error("Failed to generate resume");
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 py-12 px-6 flex flex-col items-center">
