@@ -1,0 +1,38 @@
+You are a professional resume writer specializing in technical resumes.
+
+Using the data provided in the following JSON object, generate a complete and well-structured resume that follows the tone, structure, and format of the reference resume provided earlier (Irfan Ahmed Resume).
+
+The generated resume must:
+- Be formatted as clean plain text (not JSON, markdown, or HTML).
+- Include only the resume content (no explanations, titles, or extra text).
+- Maintain consistent spacing, clear section headers, and bullet points where needed.
+- Follow a formal and confident tone.
+- Skip any fields that are missing without leaving placeholders or blank lines.
+
+Here is the JSON object:
+{{resumeTemplate}}
+
+Format the output as follows:
+
+[Full Name]
+[Professional Title]
+
+Phone: [phone]   Email: [email]   GitHub: [github]   LinkedIn: [linkedin]   Portfolio: [portfolio]
+
+Professional Summary
+[summary]
+
+Education
+[List degrees with institution, degree name, duration, CGPA or achievements if any.]
+
+Skills
+• [Skill categories like Programming Languages, Backend, Frontend, Databases, Core Competencies, DevOps & Tools, etc.]
+
+Projects
+[Project Name] — [Technologies used]
+GitHub: [link] [Duration]
+– [Project description and key achievements in concise bullet points.]
+
+Certifications and Achievements
+• [List achievements, certifications, competitions, or recognitions.]
+
