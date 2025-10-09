@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8080/";
+const BASE_URL = "http://localhost:8090/";
 
 export const apiClient = axios.create({
   baseURL: BASE_URL,
@@ -13,8 +13,8 @@ export const generateFormData = async (prompt) => {
   return response.data;
 };
 export const generateResume=async(formData)=>{
-  const resumeResponse=await apiClient.post('/getResume/resume',{
-    
+  const resumeResponse=await apiClient.post('/generateResume/resume',{
+    resumeTemplate: formData   
   })
   return resumeResponse.data;
 }

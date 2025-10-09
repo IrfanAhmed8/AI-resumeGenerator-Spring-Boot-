@@ -6,47 +6,58 @@ import heroImg from "../assets/ai_resume_illustration.png"; // make sure this im
 import { generateFormData} from "../api/ResumeGenerator";
 import toast from "react-hot-toast";
 import DynamicForm from "./DynamicForm";
+import { useFormData } from "./formData";
 const initialData = {
-  summary:
-    "I am a Java Developer with expertise in the MERN stack and DSA. I have built microservices using Spring Boot and REST APIs, showcasing my technical skills and experience.",
-  github: "https://github.com/irfan37/",
-  education: [
-    {
-      institution: "XYZ University",
-      year_of_completion: 2024,
-      degree: "B.Tech in Computer Science",
-    },
-  ],
-  projects: [
-    {
-      description: "",
-      project_title: "",
-      technologies_used: ["Spring Boot", "REST APIs"],
-    },
-  ],
-  achievements: [],
-  languages: ["English"],
-  linkedin: "https://www.linkedin.com/in/irfan37/",
-  experience: [
-    {
-      duration: "2 years",
-      role: "Java Developer",
-      responsibilities: ["Built microservices using Spring Boot and REST APIs"],
-      company_name: "",
-    },
-  ],
-  certifications: [],
-  skills: ["Java", "Spring Boot", "REST APIs"],
-  phone: "",
-  portfolio: "",
-  name: "Irfan Ahmed",
-  position: "Java Developer",
-  email: "irfan37@example.com",
+     name: "Irfan Ahmed",
+    position: "Java Developer",
+    email: "jafriirfan37@gmail.com",
+    phone: "+91 8424097584",
+    linkedin: "https://www.linkedin.com/in/irfan37/",
+    github: "https://github.com/IrfanAhmed8",
+    portfolio: "https://codolio.com/profile/Irfan66",
+    summary:
+      "Detail-oriented Java Developer with a strong foundation in DSA and hands-on experience in Spring Boot, Microservices, and Full-Stack Development.",
+    education: [
+      {
+        institution: "Don Bosco Institute of Technology, University of Mumbai",
+        degree: "Bachelor of Engineering in Computer Science",
+        duration: "Aug 2022 – May 2026 (Expected)",
+        cgpa: "8.56 (up to 4th semester)",
+      },
+    ],
+    skills: [
+      "Java",
+      "Python",
+      "C++",
+      "JavaScript",
+      "Spring Boot",
+      "React.js",
+      "MongoDB",
+      "MySQL",
+      "Docker",
+      "Git",
+    ],
+    projects: [
+      {
+        project_title: "NEWS-Mail",
+        description:
+          "Automated news summarization system using Flask and Hugging Face Transformers.",
+        technologies_used: ["Python", "Flask", "Hugging Face", "JavaScript"],
+      },
+    ],
+    certifications: [
+      "Google GenAI Study Jam 2024 — Completed Generative AI Fundamentals",
+    ],
+    achievements: [
+      "Solved 220+ DSA problems across LeetCode, GFG, Codeforces, and CodeChef",
+      "Built a Unity game for TEKNACK Game Development Competition (2024)",
+    ],
+
 };
 function GenerateResume() {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState(initialData);
+  const {formData, updateFormData} = useFormData();
   const [displayFrom,setDisplayFrom]=useState(false);
 
 
@@ -56,7 +67,7 @@ function GenerateResume() {
       setLoading (true);
       const response = await generateFormData(prompt);
       console.log(response);
-      setFormData(response);
+      updateFormData(response);
       toast.success("Resume generated successfully!");
       setDisplayFrom(true);
     }
@@ -75,7 +86,7 @@ function GenerateResume() {
       {/* Navbar */}
       <Navbar />
       
-      {displayFrom &&(<DynamicForm formData={formData} setFormData={setFormData} /> )} 
+      {displayFrom &&(<DynamicForm formData={formData} updateFormData={updateFormData} /> )} 
      
       {/* Main Content */}
       <div className="flex-grow flex flex-col md:flex-row items-center justify-center gap-10 px-6 py-12 max-w-7xl mx-auto">
@@ -104,12 +115,22 @@ function GenerateResume() {
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
             />
-            <button disabled={loading || !prompt.trim()}
-              className="btn btn-primary mt-6 w-full rounded-2xl flex items-center justify-center gap-2 text-lg"
-              onClick={HandleGenerateResume}
-            >2
-              <ArrowRightCircle size={22} /> View Extracted Details
-            </button>
+            <div className="flex flex-col items-center mt-6">
+    {loading && (
+      <div className="loading-bars border-4 border-t-transparent border-blue-500 rounded-full w-8 h-8 animate-spin"></div>
+    )}
+
+    <button
+      disabled={loading || !prompt.trim()}
+      className={`btn btn-primary mt-6 w-full rounded-2xl flex items-center justify-center gap-2 text-lg ${
+        loading ? "opacity-50 cursor-not-allowed" : ""
+      }`}
+      onClick={HandleGenerateResume}
+    >
+      {loading ? "Generating..." : "View Extracted Details"}
+      {!loading && <ArrowRightCircle size={22} />}
+    </button>
+  </div>
           </div>
 
           {/* Tips Section */}

@@ -38,7 +38,8 @@ export default function LandingPage() {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
-          <button onClick={RedirectToGeneratePage} className="btn btn-primary btn-lg rounded-2xl shadow-lg hover:scale-105 transition-transform">
+          
+          <button  onClick={RedirectToGeneratePage} className="btn btn-primary btn-lg rounded-2xl shadow-lg hover:scale-105 transition-transform">
             <Rocket className="inline mr-2" /> Generate My Resume
           </button>
         </motion.div>
