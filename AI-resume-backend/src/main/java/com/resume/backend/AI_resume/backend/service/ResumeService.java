@@ -1,4 +1,5 @@
 package com.resume.backend.AI_resume.backend.service;
+import com.resume.backend.AI_resume.backend.parser.ExtractResume;
 import com.resume.backend.AI_resume.backend.repo.resumeInterface;
 import org.json.JSONObject;
 import org.springframework.ai.chat.client.ChatClient;
@@ -16,7 +17,8 @@ import java.util.Map;
 public class ResumeService implements resumeInterface {
 
    private ChatClient chatClient;
-
+   @Autowired
+    private ExtractResume extractResume;
     @Autowired
     private DeepSeekResponseParser deepSeekResponseParser;
 
@@ -25,21 +27,13 @@ public class ResumeService implements resumeInterface {
     }
     @Override
     public String generateResume(JSONObject formData) throws IOException {
-
-        // 1️⃣ Load template from file
         String resumeTemplate = this.loadFile("resume_template.txt");
 
-        // 2️⃣ Replace placeholders with form data values
-
         String filledTemplate = putPromptToTemplate(resumeTemplate, formData.toMap());
-
-        // 3️⃣ Send to AI model
         Prompt aiPrompt = new Prompt(filledTemplate);
         String response = chatClient.prompt(aiPrompt).call().content();
 
-        // 4️⃣ Parse response JSON
-
-        return response;
+        return extractResume.extractResume(response);
     }
 
     private String loadFile(String filename) throws IOException {

@@ -5,6 +5,7 @@ Your task: Analyze the following user description and extract all important resu
 Return the result **only** in **valid JSON format**, following the exact structure below.
 
 Do not include any explanation, comments, or extra text — only the JSON.
+If you want to reason internally, do it inside <think>...</think> tags, but do not include any additional text outside the JSON.
 
 ---
 
@@ -16,23 +17,19 @@ User Description:
 Expected JSON Output Format:
 {
   "name": "",
+  "position": "",
   "email": "",
   "phone": "",
-  "position": "",
+  "linkedin": "",
+  "github": "",
+  "portfolio": "",
   "summary": "",
-  "experience": [
-    {
-      "company_name": "",
-      "role": "",
-      "duration": "",
-      "responsibilities": [""]
-    }
-  ],
   "education": [
     {
-      "degree": "",
       "institution": "",
-      "year_of_completion": ""
+      "degree": "",
+      "duration": "",
+      "cgpa": ""
     }
   ],
   "skills": [],
@@ -44,11 +41,7 @@ Expected JSON Output Format:
     }
   ],
   "certifications": [],
-  "achievements": [],
-  "languages": [],
-  "linkedin": "",
-  "github": "",
-  "portfolio": ""
+  "achievements": []
 }
 
 ---
@@ -56,5 +49,8 @@ Expected JSON Output Format:
 Instructions:
 - Only include keys that have information.
 - Keep arrays empty (`[]`) if no data is found.
-- Ensure valid JSON syntax.
+- Ensure the output is **valid JSON** (parsable by `JSONObject` in Java).
 - Summarize long text fields concisely (e.g., `summary` should be 2–3 lines max).
+- Match all field names **exactly** as shown above.
+- Do **not** add extra fields or change the structure.
+- The output should begin with `{` and end with `}` immediately after `</think>`.
