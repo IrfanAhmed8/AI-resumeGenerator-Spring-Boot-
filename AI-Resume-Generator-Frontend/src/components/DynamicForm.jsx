@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import  { useState,createContext,useContext } from "react";
 import toast, { LoaderIcon } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { generateResume } from "../api/ResumeGenerator";
+import { useForm } from "../context/formContext";
+
+const FormContext = createContext();
 
 
-
-function DynamicForm({formData,setFormData}) {
+function DynamicForm() {
   const navigate=useNavigate();
   const [loading,setLoading]=useState(false);
+   const { formData, setFormData } = useForm();
 
   const handleChange = (field, value) => {
     setFormData({ ...formData, [field]: value });

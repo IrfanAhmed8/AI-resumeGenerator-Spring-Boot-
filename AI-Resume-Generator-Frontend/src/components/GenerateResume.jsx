@@ -6,87 +6,41 @@ import heroImg from "../assets/ai_resume_illustration.png"; // make sure this im
 import { generateFormData} from "../api/ResumeGenerator";
 import toast from "react-hot-toast";
 import DynamicForm from "./DynamicForm";
-import { useFormData } from "./formData";
-const initialData = {
-     name: "Irfan Ahmed",
-    position: "Java Developer",
-    email: "jafriirfan37@gmail.com",
-    phone: "+91 8424097584",
-    linkedin: "https://www.linkedin.com/in/irfan37/",
-    github: "https://github.com/IrfanAhmed8",
-    portfolio: "https://codolio.com/profile/Irfan66",
-    summary:
-      "Detail-oriented Java Developer with a strong foundation in DSA and hands-on experience in Spring Boot, Microservices, and Full-Stack Development.",
-    education: [
-      {
-        institution: "Don Bosco Institute of Technology, University of Mumbai",
-        degree: "Bachelor of Engineering in Computer Science",
-        duration: "Aug 2022 – May 2026 (Expected)",
-        cgpa: "8.56 (up to 4th semester)",
-      },
-    ],
-    skills: [
-      "Java",
-      "Python",
-      "C++",
-      "JavaScript",
-      "Spring Boot",
-      "React.js",
-      "MongoDB",
-      "MySQL",
-      "Docker",
-      "Git",
-    ],
-    projects: [
-      {
-        project_title: "NEWS-Mail",
-        description:
-          "Automated news summarization system using Flask and Hugging Face Transformers.",
-        technologies_used: ["Python", "Flask", "Hugging Face", "JavaScript"],
-      },
-    ],
-    certifications: [
-      "Google GenAI Study Jam 2024 — Completed Generative AI Fundamentals",
-    ],
-    achievements: [
-      "Solved 220+ DSA problems across LeetCode, GFG, Codeforces, and CodeChef",
-      "Built a Unity game for TEKNACK Game Development Competition (2024)",
-    ],
+import { useNavigate } from "react-router-dom";
+import { useForm } from "../context/formContext";
 
-};
+
 function GenerateResume() {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
-  const {formData, updateFormData} = useFormData();
+  const { setFormData } = useForm();
   const [displayFrom,setDisplayFrom]=useState(false);
+  const navigate=useNavigate();
 
-
-  const HandleGenerateResume = async () => {
-    console .log("Generating resume with prompt:", prompt);
-    try{
-      setLoading (true);
+ const HandleGenerateResume = async () => {
+    console.log("Generating resume with prompt:", prompt);
+    try {
+      setLoading(true);
       const response = await generateFormData(prompt);
       console.log(response);
-      updateFormData(response);
+      setFormData(response); // Set data in context
       toast.success("Resume generated successfully!");
-      setDisplayFrom(true);
-    }
-    catch(error){
+      navigate("/Resume/Form"); // No need to pass state
+    } catch (error) {
       console.error("Error generating resume:", error);
       toast.error("Failed to generate resume. Please try again.");
-    }
-    finally{
+    } finally {
       setLoading(false);
       setPrompt("");
     }
   }
+
 
   return (
     <div className="bg-gradient-to-br from-blue-50 via-white to-blue-100 min-h-screen flex flex-col">
       {/* Navbar */}
       <Navbar />
       
-      {displayFrom &&(<DynamicForm formData={formData} updateFormData={updateFormData} /> )} 
      
       {/* Main Content */}
       <div className="flex-grow flex flex-col md:flex-row items-center justify-center gap-10 px-6 py-12 max-w-7xl mx-auto">

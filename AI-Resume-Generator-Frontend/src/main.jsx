@@ -6,7 +6,8 @@ import Home from './pages/home'
 import GenerateResume from './components/GenerateResume'
 import { Toaster } from 'react-hot-toast'
 import Resume from './components/Resume'
-import { FormProvider } from './components/formData'
+import DynamicForm from './components/DynamicForm'
+import { FormProvider } from './context/formContext'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -16,10 +17,13 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/GenerateResume" element={<GenerateResume/>}></Route>
+        <Route path="/Resume/Form" element={<DynamicForm/>}></Route>
         <Route path="/Resume" element={<Resume/>}></Route>
       </Routes>
     </BrowserRouter>
     </FormProvider>
+    
+    
     
   </StrictMode>,
 )
