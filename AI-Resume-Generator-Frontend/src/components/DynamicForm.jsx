@@ -15,16 +15,22 @@ function DynamicForm() {
   const handleChange = (field, value) => {
     setFormData({ ...formData, [field]: value });
   };
+  const handleArrayChange =(field,index,value)=>{
+    const updatedArray=[...formData[field]];
+    updatedArray[index]=value
+    setFormData({...formData,[field]:updatedArray})
+  }
 
   const handleSubmit = async (e) => {
   e.preventDefault();
   console.log("Form Data Submitted:", formData);
      setLoading(true);
   try {
-    const resumeResponse = await generateResume(formData);
+    //const resumeResponse = await generateResume(formData);
     toast.success("Resume generated successfully!");
+    console.log(formData);
    
-    navigate("/Resume", { state: { resumeResponse } });
+    navigate("/Resume", { state: { formData} });
   } catch (error) {
     console.error("Error generating resume:", error);
     toast.error("Failed to generate resume");
