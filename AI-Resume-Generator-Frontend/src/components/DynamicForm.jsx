@@ -1,8 +1,9 @@
 import  { useState,createContext,useContext } from "react";
 import toast, { LoaderIcon } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { generateResume } from "../api/ResumeGenerator";
 import { useForm } from "../context/formContext";
+import Navbar from "./Navbar";
 
 const FormContext = createContext();
 
@@ -30,7 +31,7 @@ function DynamicForm() {
     toast.success("Resume generated successfully!");
     console.log(formData);
    
-    navigate("/Resume", { state: { formData} });
+    navigate("/Templates");
   } catch (error) {
     console.error("Error generating resume:", error);
     toast.error("Failed to generate resume");
@@ -50,7 +51,12 @@ function DynamicForm() {
 
 
  return (
+  <div>
+    <div>
+      <Navbar/>
+    </div>
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-100 py-12 px-6 flex flex-col items-center">
+      
       <div className="max-w-4xl w-full bg-white shadow-xl rounded-3xl p-8 border border-blue-100">
         <h1 className="text-4xl font-extrabold text-center text-blue-700 mb-10">
           ✨ Build Your Resume Details
@@ -150,6 +156,9 @@ function DynamicForm() {
         </form>
       </div>
     </div>
+
+  </div>
+    
   );
 }
 

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 import { motion } from "framer-motion";
 import { ArrowRightCircle } from "lucide-react";
-import heroImg from "../assets/ai_resume_illustration.png"; // make sure this image exists
+import heroImg from "../assets/ai_resume_illustration.jpg"; // make sure this image exists
 import { generateFormData} from "../api/ResumeGenerator";
 import toast from "react-hot-toast";
 import DynamicForm from "./DynamicForm";
@@ -71,7 +71,7 @@ function GenerateResume() {
             />
             <div className="flex flex-col items-center mt-6">
     {loading && (
-      <div className="loading-bars border-4 border-t-transparent border-blue-500 rounded-full w-8 h-8 animate-spin"></div>
+      <div className="loading-bars border-4 border-t-transparent border-blue-500 rounded-full w-8 h-8 loading loading-dots loading-md"></div>
     )}
 
     <button
