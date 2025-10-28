@@ -18,5 +18,22 @@ export const generateResume=async(formData)=>{
   })
   return resumeResponse.data;
 }
+export const register=async(formData)=>{
+ const registerResponse = await apiClient.post(
+  '/users/register',
+  formData,  // plain object
+  { headers: { 'Content-Type': 'application/json' } }
+);
+
+  return registerResponse.data;
+}
+export const signIn = async (formData) => {
+  const signInResponse = await apiClient.post(
+    '/users/signIn',
+    formData, // send plain JS object
+    { headers: { 'Content-Type': 'application/json' } }
+  );
+  return signInResponse.data;
+};
 
 

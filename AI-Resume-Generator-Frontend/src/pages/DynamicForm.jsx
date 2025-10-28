@@ -3,7 +3,7 @@ import toast, { LoaderIcon } from "react-hot-toast";
 import { NavLink, useNavigate } from "react-router-dom";
 import { generateResume } from "../api/ResumeGenerator";
 import { useForm } from "../context/formContext";
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 
 const FormContext = createContext();
 
@@ -26,19 +26,29 @@ function DynamicForm() {
   e.preventDefault();
   console.log("Form Data Submitted:", formData);
      setLoading(true);
-  try {
-    //const resumeResponse = await generateResume(formData);
-    toast.success("Resume generated successfully!");
-    console.log(formData);
-   
-    navigate("/Templates");
-  } catch (error) {
-    console.error("Error generating resume:", error);
-    toast.error("Failed to generate resume");
-  }
-  finally{
-    setLoading(false)
-  }
+ try {
+  setLoading(true);
+  toast.loading("Saving form data...");
+
+  // simulate a small delay (2–3 seconds)
+  await new Promise((resolve) => setTimeout(resolve, 2500));
+
+  // you can uncomment this once backend integration is ready
+  // const resumeResponse = await generateResume(formData);
+
+  toast.dismiss(); // remove the loading toast
+  toast.success("Form Data Saved Successfully!");
+  console.log(formData);
+
+  navigate("/Templates");
+} catch (error) {
+  toast.dismiss();
+  console.error("Error saving Data:", error);
+  toast.error("Failed to save form data. Please try again.");
+} finally {
+  setLoading(false);
+}
+
 };
  const addField = (key, emptyValue) => {
     setFormData((prev) => ({ ...prev, [key]: [...prev[key], emptyValue] }));

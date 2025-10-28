@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { motion } from "framer-motion";
 import { ArrowRightCircle } from "lucide-react";
@@ -15,7 +15,19 @@ function GenerateResume() {
   const [loading, setLoading] = useState(false);
   const { setFormData } = useForm();
   const [displayFrom,setDisplayFrom]=useState(false);
+   const messages = [
+    "Extracting projects...",
+    "Extracting name...",
+    "Extracting certifications...",
+    "Almost done...",
+  ];
+
+    const [currentMessage, setCurrentMessage] = useState(messages[0]);
+  const [index, setIndex] = useState(0);
   const navigate=useNavigate();
+   
+
+
 
  const HandleGenerateResume = async () => {
     console.log("Generating resume with prompt:", prompt);
@@ -34,6 +46,17 @@ function GenerateResume() {
       setPrompt("");
     }
   }
+   useEffect(() => {
+    const interval = setInterval(() => {
+      setIndex((prev) => {
+        const next = (prev + 1) % messages.length;
+        setCurrentMessage(messages[next]);
+        return next;
+      });
+    }, 1500); // message changes every 1.5s
+
+    return () => clearInterval(interval);
+  }, []);
 
 
   return (
@@ -70,9 +93,14 @@ function GenerateResume() {
               onChange={(e) => setPrompt(e.target.value)}
             />
             <div className="flex flex-col items-center mt-6">
-    {loading && (
-      <div className="loading-bars border-4 border-t-transparent border-blue-500 rounded-full w-8 h-8 loading loading-dots loading-md"></div>
-    )}
+              {loading && (
+                <div className="flex flex-col items-center space-y-3">
+                  <div className="border-4 border-t-transparent border-blue-500 rounded-full w-10 h-10 animate-spin"></div>
+                  <p className="text-lg font-semibold text-blue-700 tracking-wide animate-pulse">
+                    {currentMessage}
+                  </p>
+                </div>
+              )}
 
     <button
       disabled={loading || !prompt.trim()}

@@ -125,7 +125,7 @@ export default function LandingPage() {
         <h3 className="text-3xl font-bold mb-4">
           Ready to Create Your Perfect Resume?
         </h3>
-        <button className="btn bg-white text-blue-700 px-8 py-3 rounded-2xl text-lg hover:bg-gray-200">
+        <button onClick={()=>{}}className="btn bg-white text-blue-700 px-8 py-3 rounded-2xl text-lg hover:bg-gray-200">
           Start Now
         </button>
         <p className="mt-6 text-blue-100">

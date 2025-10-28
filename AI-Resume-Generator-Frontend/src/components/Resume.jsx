@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import { useForm } from "../context/formContext";
+import toast, { Toaster } from "react-hot-toast";
 
 
 const Resume = () => {
@@ -10,6 +11,9 @@ const Resume = () => {
   const handlePrint = useReactToPrint({
   contentRef: resumeRef, // safer
   documentTitle: `${formData.name || "My"}_Resume`,
+   onAfterPrint: () => {
+    toast.success("Resume Downloaded Successfully!");
+  }
 });
 
 
@@ -114,19 +118,11 @@ const Resume = () => {
             Certifications
           </h3>
           <ul className="list-disc list-inside">
-            {formData.certifications.map((cert, idx) => (
-              <li key={idx}>
-                <a
-                  href={cert.link}
-                  className="text-blue-600 hover:underline"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {cert.title}
-                </a>
-              </li>
-            ))}
-          </ul>
+  {formData.certifications.map((cert, idx) => (
+    <li key={idx}>{cert}</li>
+  ))}
+</ul>
+
         </section>
 
         {/* Achievements */}
