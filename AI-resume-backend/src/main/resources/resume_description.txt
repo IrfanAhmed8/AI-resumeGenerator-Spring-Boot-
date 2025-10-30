@@ -47,10 +47,8 @@ Expected JSON Output Format:
 ---
 
 Instructions:
-- Only include keys that have information.
-- Keep arrays empty (`[]`) if no data is found.
-- Ensure the output is **valid JSON** (parsable by `JSONObject` in Java).
+- **Always include all keys**, even if no data is found (use empty strings `""` or empty arrays `[]` as needed).
+- The output must be strictly valid JSON and parsable by `JSON.parse()` or `JSONObject`.
+- Do not omit or rename any field.
 - Summarize long text fields concisely (e.g., `summary` should be 2–3 lines max).
-- Match all field names **exactly** as shown above.
-- Do **not** add extra fields or change the structure.
-- The output should begin with `{` and end with `}` immediately after `</think>`.
+- The JSON should begin with `{` and end with `}` immediately after `</think>`.
