@@ -1,5 +1,8 @@
 # AI Resume Generator
 
+## Demo Video
+Watch the demo on YouTube-(https://youtu.be/Br1FxZnEunM)
+
 AI-powered resume builder with a Java Spring Boot backend and a React + Vite frontend.  
 Backend extracts structured resume data from a user prompt via an AI API; frontend lets users review/edit,chosse from from multiple templates and download resumes.
 
